@@ -1,12 +1,18 @@
 {
-	"coc.preferences.hoverTarget": "preview",
+	"python.pythonPath": "/usr/bin/python3",
+	"coc.preferences.semanticTokensHighlights": false,
 	"coc.preferences.enableFloatHighlight": true,
 	"coc.preferences.snippetStatusText": "Ⓢ ",
-	"coc.preferences.extensionUpdateCheck": "weekly",
+	"coc.preferences.extensionUpdateCheck": "daily",
+	"coc.preferences.messageLevel": "error",
+	"coc.source.around.firstMatch": false,
+	"coc.source.buffer.firstMatch": false,
+	"coc.source.syntax.firstMatch": false,
 	"suggest.detailMaxLength": 60,
 	"suggest.noselect": true,
 	"suggest.enablePreselect": false,
-	"suggest.triggerAfterInsertEnter": false,
+	"suggest.triggerAfterInsertEnter": true,
+	"suggest.autoTrigger": "always",
 	"suggest.timeout": 5000,
 	"suggest.enablePreview": true,
 	"suggest.floatEnable": true,
@@ -42,59 +48,79 @@
 		"variable": "\ue71b"
 	},
 	"diagnostic.signOffset": 1,
-	"diagnostic.errorSign": "●",
-	"diagnostic.warningSign": "●",
-	"diagnostic.infoSign": "🛈",
-	"diagnostic.hintSign": "•",
+	"diagnostic.errorSign": "\uf467",
+	"diagnostic.warningSign": "\uf071",
+	"diagnostic.infoSign": "\uf129",
+	"diagnostic.hintSign": "\uf864",
 	"diagnostic.displayByAle": false,
 	"diagnostic.refreshOnInsertMode": false,
-	"diagnostic.refreshAfterSave": false,
 	"diagnostic.checkCurrentLine": true,
 	"diagnostic.virtualTextPrefix": " ❯❯❯ ",
-	"diagnostic.virtualText": true,
+	"diagnostic.virtualText": false,
 	"codeLens.enable": true,
 	"list.previewHighlightGroup": "Statement",
-	"list.nextKeymap": "<C-e>",
-	"list.previousKeymap": "<C-u>",
+	"list.nextKeymap": "<C-i>",
+	"list.previousKeymap": "<C-k>",
+	"importCost.bundleSizeDecoration": "both",
+	"importCost.typescriptExtensions": ["\\.tsx?$"],
+	"importCost.javascriptExtensions": ["\\.jsx?$"],
+	"importCost.showCalculatingDecoration": true,
+	"importCost.debug": false,
+	"snippets.ultisnips.directories": [
+		"$HOME/.config/nvim/Ultisnips/",
+		"$HOME/.config/nvim/plugged/vim-snippets/UltiSnips/"
+	],
 	"coc.preferences.formatOnSaveFiletypes": [
 		"javascript",
+		"typescript",
 		"html",
 		"css",
-		"python"
+		"json",
+		"java",
+		"python",
+		"vue",
+		"svelte",
+		"c",
+		"cs",
+		"prisma"
 	],
+	"yaml.format.enable": true,
 	"signature.target": "float",
-	"yank.enableCompletion" : false,
+	"yank.enableCompletion": false,
+	"typescript.suggestionActions.enabled": true,
+	"typescript.format.enabled": true,
+	"jest.watch": false,
 	"explorer.width": 38,
 	"explorer.quitOnOpen": true,
 	"explorer.sources": [
 		{
 			"name": "buffer",
-			"expand": true
+			"expand": false
 		},
 		{
 			"name": "file",
 			"expand": true
 		}
 	],
-	"todolist.autoUpload": true,
 	"explorer.file.column.indent.indentLine": true,
 	"explorer.file.showHiddenFiles": true,
 	"explorer.icon.enableNerdfont": true,
 	"explorer.file.column.git.showIgnored": true,
 	"explorer.keyMappingMode": "none",
-	"explorer.keyMappings": {
-		"u": "nodePrev",
-		"e": "nodeNext",
+	"explorer.buffer.showHiddenBuffers": false,
+	"explorer.keyMappings.global": {
+		"i": "nodePrev",
+		"k": "nodeNext",
 		"h": "toggleSelection",
 		"<tab>": "actionMenu",
-		"n": "collapse",
 		"gl": "expandRecursive",
 		"gh": "collapseRecursive",
-		"i": "expand",
-		"<cr>": "open",
-		"I": "openInVsplit",
-		"o": "openInTab",
-		"N": "gotoParent",
+		"e": ["wait", "expandable?", "expand", "open"],
+		"<cr>": ["wait", "expandable?", "cd", "open"],
+		"I": "open:vsplit",
+		"o": ["wait", "expanded?", "collapse", "expand"],
+		"O": "open:tab",
+		"n": "collapse",
 		"l": "gotoParent",
 		"yp": "copyFilepath",
 		"yn": "copyFilename",
@@ -103,7 +129,7 @@
 		"pp": "pasteFile",
 		"dD": "deleteForever",
 		"a": "addFile",
-		"k": "addFile",
+		"+": "addFile",
 		"M": "addDirectory",
 		"cw": "rename",
 		".": "toggleHidden",
@@ -126,41 +152,86 @@
 		"<<": "gitStage",
 		">>": "gitUnstage"
 	},
-	"git.enableGutters": true,
-	"git.branchCharacter":"\uf408",
-	"git.addGBlameToBufferVar": false,
-	"git.addGBlameToVirtualText": false,
-	"git.virtualTextPrefix": " ❯❯❯ ",
-	"git.addedSign.hlGroup": "GitGutterAdd",
-	"git.changedSign.hlGroup": "GitGutterChange",
-	"git.removedSign.hlGroup": "GitGutterDelete",
-	"git.topRemovedSign.hlGroup": "GitGutterDelete",
-	"git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-	"git.addedSign.text":"▎",
-	"git.changedSign.text":"░",
-	"git.removedSign.text":"▏",
-	"git.topRemovedSign.text": "▔",
-	"git.changeRemovedSign.text": "▒",
-	"git.enableGlobalStatus": false,
-	"git.signOffset": 2,
-	"tslint.autoFixOnSave": true,
+	"flutter.outlineWidth": 40,
+	"flutter.outlineIconPadding": 0,
+	"flutter.UIPath": true,
+	"flutter.openDevLogSplitCommand": "botright 12split",
+	"flutter.lsp.initialization.onlyAnalyzeProjectsWithOpenFiles": false,
+	"flutter.trace.server": "off",
+	"tslint.autoFixOnSave": false,
 	"python.autoComplete.addBrackets": true,
 	"python.jediEnabled": false,
 	"python.formatting.provider": "yapf",
 	"python.formatting.yapfArgs": [
-        "--style",
-        "{SPACES_AROUND_POWER_OPERATOR: True, SPACES_BEFORE_COMMENT: 1}"
-    ],
+		"--style",
+		"{SPACES_AROUND_POWER_OPERATOR: True, SPACES_BEFORE_COMMENT: 1}"
+	],
 	"html.format.enable": true,
 	"javascript.referencesCodeLens.enable": true,
 	"javascript.showUnused": true,
 	"javascript.suggest.names": true,
 	"javascript.suggestionActions.enabled": true,
 	"json.format.enable": true,
+	"eslint.autoFixOnSave": false,
+	"prettier.printWidth": 100,
+	"prettier.disableLanguages": [],
+	"prettier.formatterPriority": 1,
+	"prettier.useTabs": true,
+	"prettier.trailingComma": "all",
+	"prettier.singleQuote": false,
+	"todolist.autoUpload": true,
+	"todolist.promptForReminder": false,
+	"coc-actions.hideCursor": false,
+	"coc-actions.showActionKind": true,
+	"diagnostic-languageserver.filetypes": {
+		"vim": "vint",
+		"email": "languagetool",
+		"markdown": ["write-good", "markdownlint"],
+		"sh": "shellcheck",
+		"elixir": ["mix_credo", "mix_credo_compile"],
+		"eelixir": ["mix_credo", "mix_credo_compile"],
+		"php": ["phpstan", "psalm"]
+	},
+	"diagnostic-languageserver.formatFiletypes": {
+		"elixir": "mix_format",
+		"eelixir": "mix_format"
+	},
+	"jedi.enable": true,
+	"jedi.startupMessage": false,
+	"jedi.markupKindPreferred": "plaintext",
+	"jedi.trace.server": "off",
+	"jedi.jediSettings.autoImportModules": [],
+	"jedi.jediSettings.caseInsensitiveCompletion": true,
+	"jedi.jediSettings.debug": false,
+	"jedi.executable.command": "jedi-language-server",
+	"jedi.executable.args": [],
+	"jedi.codeAction.nameExtractFunction": "jls_extract_def",
+	"jedi.codeAction.nameExtractVariable": "jls_extract_var",
+	"jedi.completion.disableSnippets": false,
+	"jedi.completion.resolveEagerly": false,
+	"jedi.completion.ignorePatterns": [],
+	"jedi.diagnostics.enable": true,
+	"jedi.diagnostics.didOpen": true,
+	"jedi.diagnostics.didChange": true,
+	"jedi.diagnostics.didSave": true,
+	"jedi.hover.enable": true,
+	"jedi.hover.disable.keyword.all": false,
+	"jedi.hover.disable.keyword.names": [],
+	"jedi.hover.disable.keyword.fullNames": [],
+	"jedi.workspace.extraPaths": [],
+	"jedi.workspace.symbols.maxSymbols": 20,
+	"jedi.workspace.symbols.ignoreFolders": [".nox", ".tox", ".venv", "__pycache__", "venv"],
 	"languageserver": {
 		"lua": {
 			"command": "lua-lsp",
 			"filetypes": ["lua"]
+		},
+		"swift": {
+			"command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+			"args": [],
+			"filetypes": ["swift"],
+			"initializationOptions": {},
+			"settings": {}
 		},
 		"golang": {
 			"command": "gopls",
@@ -169,7 +240,8 @@
 			"initializationOptions": {
 				"gocodeCompletionEnabled": true,
 				"diagnosticsEnabled": true,
-				"lintTool": "golint"
+				"lintTool": "golint",
+				"args": ["serve", "-debug", "0.0.0.0:8484", "-rpc.trace"]
 			}
 		},
 		"bash": {
@@ -183,11 +255,10 @@
 			"filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
 			"rootPatterns": [".ccls", ".ccls-root", "compile_commands.json", ".git/", ".hg/"],
 			"initializationOptions": {
-				 "cache": {
-					 "directory": "/tmp/ccls"
-				 }
-			 }
+				"cache": {
+					"directory": "/usr/bin/ccls"
+				}
+			}
 		}
 	}
 }
-
