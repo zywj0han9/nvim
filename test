@@ -1,7 +1,4 @@
 {
-	"python.pythonPath": "/usr/bin/python3",
-	// "clangd.enabled": false,
-	// "clangd.path": "/usr/lib/qt",
 	"coc.preferences.semanticTokensHighlights": false,
 	"coc.preferences.enableFloatHighlight": true,
 	"coc.preferences.snippetStatusText": "Ⓢ ",
@@ -61,8 +58,8 @@
 	"diagnostic.virtualText": false,
 	"codeLens.enable": true,
 	"list.previewHighlightGroup": "Statement",
-	"list.nextKeymap": "<C-i>",
-	"list.previousKeymap": "<C-k>",
+	"list.nextKeymap": "<C-e>",
+	"list.previousKeymap": "<C-u>",
 	"importCost.bundleSizeDecoration": "both",
 	"importCost.typescriptExtensions": ["\\.tsx?$"],
 	"importCost.javascriptExtensions": ["\\.jsx?$"],
@@ -115,13 +112,13 @@
 	"explorer.keyMappingMode": "none",
 	"explorer.buffer.showHiddenBuffers": false,
 	"explorer.keyMappings.global": {
-		"i": "nodePrev",
-		"k": "nodeNext",
+		"u": "nodePrev",
+		"e": "nodeNext",
 		"h": "toggleSelection",
 		"<tab>": "actionMenu",
 		"gl": "expandRecursive",
 		"gh": "collapseRecursive",
-		"e": ["wait", "expandable?", "expand", "open"],
+		"i": ["wait", "expandable?", "expand", "open"],
 		"<cr>": ["wait", "expandable?", "cd", "open"],
 		"I": "open:vsplit",
 		"o": ["wait", "expanded?", "collapse", "expand"],
@@ -135,7 +132,7 @@
 		"pp": "pasteFile",
 		"dD": "deleteForever",
 		"a": "addFile",
-		"+": "addFile",
+		"k": "addFile",
 		"M": "addDirectory",
 		"cw": "rename",
 		".": "toggleHidden",
@@ -241,7 +238,7 @@
 			"rootPatterns": [".ccls", ".ccls-root", "compile_commands.json", ".git/", ".hg/"],
 			"initializationOptions": {
 				"cache": {
-					"directory": "/usr/bin/ccls"
+					"directory": "/tmp/ccls"
 				}
 			}
 		}

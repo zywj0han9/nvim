@@ -115,6 +115,7 @@ let mapleader=" "
 noremap ; :
 " " Save & quit
 noremap Q :q!<CR>
+noremap q :q<CR>
 " noremap <C-q> :qa<CR>
 noremap S :w<CR>
 "
@@ -129,37 +130,38 @@ nnoremap Y y$
 nnoremap < <<
 nnoremap > >>
 "
-" " Insert Key
+" Insert Key
 noremap o i
 noremap O I
-" " Search
+" Search
 " noremap <LEADER><CR> :nohlsearch<CR>
 "
-" " Adjacent duplicate words
-" noremap <LEADER>dw /\(\<\w\+\>\)\_s*\1
-"
-" " Space to Tab
+" Adjacent duplicate words
+noremap <LEADER>dw /\(\<\w\+\>\)\_s*\1
+
+" Space to Tab
 nnoremap <LEADER>tt :%s/	/\t/g
 vnoremap <LEADER>tt :s/	/\t/g
-"
-" " Folding
+
+" Folding
 noremap <silent> <LEADER>o za
 "
-" " Open up lazygit
-" " noremap \g :Git
-" " noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
-"
-" " nnoremap <c-n> :tabe<CR>:-tabmove<CR>:term lazynpm<CR>
-"
-" " ===
-" " === Cursor Movement
-" " ===
-" " New cursor movement (the default arrow keys are used for resizing windows)
-" "     ^
-" "     i
-" " < j   l >
-" "     k
-" "     v
+" Open up lazygit
+noremap \g :LazyGit
+noremap \gc :LazyGitConfig
+noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
+
+nnoremap <c-n> :tabe<CR>:-tabmove<CR>:term lazynpm<CR>
+
+" ===
+" === Cursor Movement
+" ===
+" New cursor movement (the default arrow keys are used for resizing windows)
+"     ^
+"     i
+" < j   l >
+"     k
+"     v
 noremap <silent> i k
 noremap <silent> j h
 noremap <silent> k j
@@ -328,11 +330,11 @@ func! CompileRunGcc()
  		" :term time ./%<
  	elseif &filetype == 'cpp'
  		set splitbelow
- 		" exec "!g++ -std=c++11 % -Wall -o %<"
+ 		exec "!g++ -std=c++14 % -Wall -o %<"
+ 		exec "!time ./%<"
  		:sp
  		:res -15
- 		:term g++ -std=c++11 % -Wall -o %< && time ./%<
- 		" exec "!time ./%<"
+ 		" :term g++ -std=c++11 % -Wall -o %< && time ./%<
  		" :term time ./%<
  	elseif &filetype == 'cs'
  		set splitbelow
@@ -344,12 +346,13 @@ func! CompileRunGcc()
  		set splitbelow
  		:sp
  		:res -5
- 		term javac % && time java %<
+ 		:term javac % && time java %<
  	elseif &filetype == 'sh'
  		:!time bash %
  	elseif &filetype == 'python'
  		set splitbelow
  		:sp
+ 		:res -5
  		:term python3 %
  	elseif &filetype == 'html'
  		silent! exec "!".g:mkdp_browser." % &"
@@ -365,6 +368,11 @@ func! CompileRunGcc()
  		set splitbelow
  		:sp
  		:term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
+	elseif &filetype == 'racket'
+		set splitbelow
+		:sp
+		:res -5
+		term racket %
  	elseif &filetype == 'go'
  		set splitbelow
  		:sp
@@ -383,7 +391,7 @@ func! CompileRunGcc()
  " Colors Themes
  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
  Plug 'EdenEast/nightfox.nvim'
-
+ Plug 'morhetz/gruvbox'
  " Testing my own plugin
  " Plug 'theniceboy/vim-calc'
 
@@ -573,17 +581,21 @@ call plug#end()
  set lazyredraw
  "set regexpengine=1
 "Format
-inoremap <leader>f :Format<CR>
+nnoremap <leader>f :Format<CR>
 
  " ===
  " === Dress up my vim
  " ===
  set termguicolors " enable true colors support
  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
- " colorscheme 
- colorscheme carbonfox
- " colorscheme nightfox
- hi NonText ctermfg=gray guifg=grey10
+ colorscheme gruvbox
+ set background=dark
+"  colorscheme tokyonight
+" colorscheme dawnfox
+" colorscheme carbonfox
+" colorscheme nightfox
+" colorscheme nordfox
+hi NonText ctermfg=gray guifg=grey10
  " hi SpecialKey ctermfg=blue guifg=grey70
  "
  " ===================== Start of Plugin Settings =====================
@@ -766,7 +778,7 @@ autocmd BufNewFile *.sh,*.[ch],*.c,*.cpp,*.py,*.md,Makefile,*.mk exec ":call Set
 func SetComment()
 	call setline(1,"/*================================================================") 
   call append(line("."),   "*   Copyright (C) ".strftime("%Y")." Sangfor Ltd. All rights reserved.")
-  call append(line(".")+1, "*   ") 
+  call append(line(".")+1, "*")
   call append(line(".")+2, "*   @File：".expand("%:t")) 
   call append(line(".")+3, "*   @Author：zyw9")
   call append(line(".")+4, "*   @DateTime：".strftime("%Y-%m-%d %H:%M:%S")) 
@@ -780,7 +792,7 @@ endfunc
 func SetComment_sh()
   call setline(3, "#================================================================") 
   call setline(4, "#   Copyright (C) ".strftime("%Y")." Sangfor Ltd. All rights reserved.")
-  call setline(5, "#   ") 
+  call setline(5, "#")
   call setline(6, "#   @File：".expand("%:t")) 
   call setline(7, "#   @Author：zyw9")
   call setline(8, "#   @DateTime：".strftime("%Y-%m-%d %H:%M:%S")) 

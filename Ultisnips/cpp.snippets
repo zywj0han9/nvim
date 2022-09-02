@@ -1,4 +1,4 @@
-snippet main
+snippet Main
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -8,12 +8,32 @@ int main(){
 	return 0;
 }
 endsnippet
+snippet main
+int main(){
+	${0}
+	return 0;
+}
+endsnippet
 
+endsnippet
 snippet cout
-cout << ${0};
+cout << ${0} << endl;
 endsnippet
 
 snippet cin
-cin >> ${0};
+cin >> ${0}
 endsnippet
 
+snippet int
+int ${0} = ${1};
+endsnippet
+
+snippet char
+char ${0};
+endsnippet
+
+snippet class
+class ${0}{
+	${1}
+};
+endsnippet
