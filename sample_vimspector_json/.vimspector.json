@@ -1,17 +1,17 @@
 {
 	"configurations": {
 		"launch - netcoredbg": {
-      "adapter": "netcoredbg",
-      "filetypes": [ "cs", "fsharp", "vbnet" ], // optional
-      "configuration": {
-        "request": "launch",
-        "program": "${workspaceRoot}/bin/Debug/netcoreapp2.2/csharp.dll",
-        "args": [],
-        "stopAtEntry": true,
-        "cwd": "${workspaceRoot}",
-        "env": {}
-      }
-    },
+			"adapter": "netcoredbg",
+			"filetypes": ["cs", "fsharp", "vbnet"],
+			"configuration": {
+				"request": "launch",
+				"program": "${workspaceRoot}/bin/Debug/netcoreapp2.2/csharp.dll",
+				"args": [],
+				"stopAtEntry": true,
+				"cwd": "${workspaceRoot}",
+				"env": {}
+			}
+		},
 		"Cpp: Launch": {
 			"adapter": "vscode-cpptools",
 			"configuration": {
