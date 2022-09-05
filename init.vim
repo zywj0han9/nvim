@@ -147,8 +147,8 @@ vnoremap <LEADER>tt :s/	/\t/g
 noremap <silent> <LEADER>o za
 "
 " Open up lazygit
-noremap \g :LazyGit
-noremap \gc :LazyGitConfig
+noremap \g :LazyGit<CR>
+noremap \gc :LazyGitConfig<CR>
 noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
 
 nnoremap <c-n> :tabe<CR>:-tabmove<CR>:term lazynpm<CR>
@@ -323,8 +323,8 @@ func! CompileRunGcc()
 		set splitbelow
 		" exec "!mkdir -p out"
 		" exec "!gcc -ansi -Wall % -o %<"
-		:sp
- 		:res -15
+		" :sp
+ 		" :res -15
  		:term gcc -ansi -Wall % -o %< && time ./%<
  		" exec "!time ./%<"
  		" :term time ./%<
@@ -332,27 +332,27 @@ func! CompileRunGcc()
  		set splitbelow
  		exec "!g++ -std=c++14 % -Wall -o %<"
  		exec "!time ./%<"
- 		:sp
- 		:res -15
+ 		" :sp
+ 		" :res -15
  		" :term g++ -std=c++11 % -Wall -o %< && time ./%<
  		" :term time ./%<
  	elseif &filetype == 'cs'
  		set splitbelow
  		silent! exec "!mcs %"
- 		:sp
- 		:res -5
+ 		" :sp
+ 		" :res -5
  		:term mono %<.exe
  	elseif &filetype == 'java'
  		set splitbelow
- 		:sp
- 		:res -5
+ 		" :sp
+ 		" :res -5
  		:term javac % && time java %<
  	elseif &filetype == 'sh'
  		:!time bash %
  	elseif &filetype == 'python'
  		set splitbelow
- 		:sp
- 		:res -5
+ 		" :sp
+ 		" :res -5
  		:term python3 %
  	elseif &filetype == 'html'
  		silent! exec "!".g:mkdp_browser." % &"
@@ -667,7 +667,14 @@ hi NonText ctermfg=gray guifg=grey10
  	\ 'coc-sql',
  	\ 'coc-java',
  	\ 'coc-r-lsp',
- 	\ 'coc-go']
+ 	\ 'coc-go',
+ 	\ 'coc-git',
+ 	\ 'coc-nav',
+	\ 'coc-htmldjango',
+	\ 'coc-html-css-support',
+	\ 'coc-docker',
+	\ 'coc-vimlsp',
+	\ 'coc-xml']
  " TAB Using
 if empty(mapcheck("\<C-n>", 'i'))
   inoremap <silent><expr> <C-n> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
