@@ -147,7 +147,7 @@ vnoremap <LEADER>tt :s/	/\t/g
 noremap <silent> <LEADER>o za
 "
 " Open up lazygit
-noremap \g :LazyGit<CR>
+noremap \lg :LazyGit<CR>
 noremap \gc :LazyGitConfig<CR>
 noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
 
@@ -781,7 +781,7 @@ let g:snips_author = 'zyw9'
 " let g:snips_File = expand("%:t")
 " let g:snips_datetime = <C-r> = :read !date<CR>
 autocmd BufRead,BufNewFile tsconfig.json setfiletype=jsonc
-autocmd BufNewFile *.sh,*.[ch],*.c,*.cpp,*.py,*.md,Makefile,*.mk exec ":call SetTitle()"
+autocmd BufNewFile *.sh,*.[ch],*.c,*.cpp,*.py,*.md,Makefile,*.mk,*.h exec ":call SetTitle()"
 func SetComment()
 	call setline(1,"/*================================================================") 
   call append(line("."),   "*   Copyright (C) ".strftime("%Y")." Sangfor Ltd. All rights reserved.")
@@ -831,6 +831,9 @@ func SetTitle()
 		elseif &filetype == 'cpp'
 			call SetComment()
 		elseif &filetype == 'c'
+			call SetComment()
+		elseif &filetype == 'h'
+			call SetComment()
 		endif
 	endif
 endfunc
