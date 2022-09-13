@@ -781,7 +781,7 @@ let g:snips_author = 'zyw9'
 " let g:snips_File = expand("%:t")
 " let g:snips_datetime = <C-r> = :read !date<CR>
 autocmd BufRead,BufNewFile tsconfig.json setfiletype=jsonc
-autocmd BufNewFile *.sh,*.[ch],*.c,*.cpp,*.py,*.md,Makefile,*.mk,*.h exec ":call SetTitle()"
+autocmd BufNewFile *.sh,*.[ch],*.c,*.cpp,*.py,*.md,Makefile,*.mk exec ":call SetTitle()"
 func SetComment()
 	call setline(1,"/*================================================================") 
   call append(line("."),   "*   Copyright (C) ".strftime("%Y")." Sangfor Ltd. All rights reserved.")
@@ -818,23 +818,21 @@ func SetTitle()
     call setline(1,"#!/system/bin/sh") 
     call setline(2,"")
     call SetComment_sh()
-	else 
-		if &filetype == 'python'
-			call setline(1, "#! /usr/bin/python3")
-			call setline(2, "# coding=utf-8")
-			call setline(3, "###########################################")
-			call setline(4, "# @File: ".expand("%:t"))
-			call setline(5, "# @Author:   zyw9")
-			call setline(6, "# @DateTime: ".strftime("%Y-%m-%d %H:%M:%S"))
-			call setline(7, "###########################################")
-			call setline(8,"")
-		elseif &filetype == 'cpp'
-			call SetComment()
-		elseif &filetype == 'c'
-			call SetComment()
-		elseif &filetype == 'h'
-			call SetComment()
-		endif
+	elseif &filetype == 'python'
+		call setline(1, "#! /usr/bin/python3")
+		call setline(2, "# coding=utf-8")
+		call setline(3, "###########################################")
+		call setline(4, "# @File: ".expand("%:t"))
+		call setline(5, "# @Author:   zyw9")
+		call setline(6, "# @DateTime: ".strftime("%Y-%m-%d %H:%M:%S"))
+		call setline(7, "###########################################")
+		call setline(8,"")
+	elseif &filetype == 'cpp'
+		call SetComment()
+	elseif &filetype == 'c'
+		call SetComment()
+		" elseif &filetype == 'h'
+		" 	call SetComment()
 	endif
 endfunc
 
