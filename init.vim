@@ -589,12 +589,11 @@ nnoremap <leader>f :Format<CR>
  set termguicolors " enable true colors support
  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
  colorscheme gruvbox
+
  set background=dark
-"  colorscheme tokyonight
-" colorscheme dawnfox
-" colorscheme carbonfox
-" colorscheme nightfox
-" colorscheme nordfox
+ "  colorscheme tokyonight
+set termguicolors
+hi Normal guibg=NONE ctermbg=NONE
 hi NonText ctermfg=gray guifg=grey10
  " hi SpecialKey ctermfg=blue guifg=grey70
  "
