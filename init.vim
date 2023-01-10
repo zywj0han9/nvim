@@ -387,7 +387,7 @@ func! CompileRunGcc()
  " 插件管理
  call plug#begin('$HOME/.config/nvim/plugged')
  " Plug 'LoricAndre/fzterm.nvim'
-
+ Plug 'github/copilot.vim'
  " Colors Themes
  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
  Plug 'EdenEast/nightfox.nvim'
