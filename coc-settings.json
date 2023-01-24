@@ -227,8 +227,7 @@
 		"bash": {
 			"command": "bash-language-server",
 			"args": ["start"],
-			"filetypes": ["sh"],
-			"ignoredRootPaths": []
+			"filetypes": ["sh"]
 		},
 		"racket": {
 			"command": "racket",
@@ -244,6 +243,29 @@
 					"directory": "/usr/bin/ccls"
 				}
 			}
+		},
+		"clangd": {
+			"command": "clangd",
+			"rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+			"filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+		},
+		"CMake": {
+			"command": "cmake-language-server",
+			"filetypes": ["cmake"],
+			"rootPatterns": ["build/"],
+			"initializationOptions": {
+				"buildDirectory": "build"
+			}
+		},
+		"golang": {
+			"command": "gopls",
+			"rootPatterns": ["go.mod"],
+			"filetypes": ["go"]
+		},
+		"sql": {
+			"module": "/path/to/node_modules/sql-language-server/dist/bin/cli.js",
+			"args": ["up", "--method", "node-ipc"],
+			"filetypes": ["sql", "mysql"]
 		}
 	}
 }

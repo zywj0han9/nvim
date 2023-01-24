@@ -325,12 +325,12 @@ func! CompileRunGcc()
 		" exec "!gcc -ansi -Wall % -o %<"
 		" :sp
  		" :res -15
- 		:term gcc -ansi -Wall % -o %< && time ./%<
+ 		:term gcc -ansi -Wall % -o %:h/out %:t < && time ./%<
  		" exec "!time ./%<"
  		" :term time ./%<
  	elseif &filetype == 'cpp'
  		set splitbelow
- 		exec "!g++ -std=c++14 % -Wall -o %<"
+ 		exec "!g++ -std=c++14 % -Wall -o %:h/out <"
  		exec "!time ./%<"
  		" :sp
  		" :res -15
@@ -426,7 +426,7 @@ func! CompileRunGcc()
  Plug 'liuchengxu/vista.vim'
 
  " Debugger
- " Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python --enable-go'}
+ Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python --enable-go'}
 
  " Auto Complete
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -572,6 +572,12 @@ func! CompileRunGcc()
 
 " Format
 " Plug ''
+" Language Server -Neovim
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
 
 call plug#end()
 
@@ -666,6 +672,7 @@ hi NonText ctermfg=gray guifg=grey10
  	\ 'coc-sql',
  	\ 'coc-java',
  	\ 'coc-r-lsp',
+	\ 'coc-phpls',
  	\ 'coc-go',
  	\ 'coc-git',
  	\ 'coc-nav',
@@ -673,7 +680,8 @@ hi NonText ctermfg=gray guifg=grey10
 	\ 'coc-html-css-support',
 	\ 'coc-docker',
 	\ 'coc-vimlsp',
-	\ 'coc-xml']
+	\ 'coc-xml',
+  \ 'coc-markdownlint']
  " TAB Using
 if empty(mapcheck("\<C-n>", 'i'))
   inoremap <silent><expr> <C-n> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
@@ -853,6 +861,13 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 noremap <LEADER>tm :TableModeToggle<CR>
 "let g:table_mode_disable_mappings = 1
 let g:table_mode_cell_text_object_i_map = 'k<Bar>'
+
+" ===
+" === Language-Server-Neovim
+" ===
+let g:LanguageClient_serverCommands = {
+    \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
+    \ }
 
 
 " ===
