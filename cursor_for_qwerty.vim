@@ -198,7 +198,7 @@ noremap [alh<LEADER> 196k
 noremap [alj<LEADER> 197k
 noremap [alk<LEADER> 198k
 noremap [all<LEADER> 199k
-            
+
 noremap   'a<LEADER>   1j
 noremap   's<LEADER>   2j
 noremap   'd<LEADER>   3j

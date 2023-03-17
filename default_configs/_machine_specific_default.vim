@@ -1,6 +1,6 @@
 " please read through this file and change what you need to change
-
-" let g:python_host_prog='/usr/bin/python2'
+let g:snips_author = 'J0han'
+let g:python_host_prog='/usr/bin/python2'
 let g:python3_host_prog='/usr/bin/python3'
 let g:qt_host_prog='/usr/lib/qt'
 " let g:qt5_host_prog=''

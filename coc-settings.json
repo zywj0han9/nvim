@@ -1,7 +1,4 @@
 {
-	"python.pythonPath": "/usr/bin/python3",
-	// "clangd.enabled": false,
-	// "clangd.path": "/usr/lib/qt",
 	"coc.preferences.semanticTokensHighlights": false,
 	"coc.preferences.enableFloatHighlight": true,
 	"coc.preferences.snippetStatusText": "Ⓢ ",
@@ -61,8 +58,8 @@
 	"diagnostic.virtualText": false,
 	"codeLens.enable": true,
 	"list.previewHighlightGroup": "Statement",
-	"list.nextKeymap": "<C-i>",
-	"list.previousKeymap": "<C-k>",
+	"list.nextKeymap": "<C-e>",
+	"list.previousKeymap": "<C-u>",
 	"importCost.bundleSizeDecoration": "both",
 	"importCost.typescriptExtensions": ["\\.tsx?$"],
 	"importCost.javascriptExtensions": ["\\.jsx?$"],
@@ -88,7 +85,9 @@
 		"cpp",
 		"cs",
 		"racket",
-		"prisma"
+		"prisma",
+		"dart",
+		"terraform"
 	],
 	"yaml.format.enable": true,
 	"signature.target": "float",
@@ -121,7 +120,7 @@
 		"<tab>": "actionMenu",
 		"gl": "expandRecursive",
 		"gh": "collapseRecursive",
-		"e": ["wait", "expandable?", "expand", "open"],
+		"u": ["wait", "expandable?", "expand", "open"],
 		"<cr>": ["wait", "expandable?", "cd", "open"],
 		"I": "open:vsplit",
 		"o": ["wait", "expanded?", "collapse", "expand"],
@@ -135,7 +134,7 @@
 		"pp": "pasteFile",
 		"dD": "deleteForever",
 		"a": "addFile",
-		"+": "addFile",
+		"A": "addFile",
 		"M": "addDirectory",
 		"cw": "rename",
 		".": "toggleHidden",
@@ -164,6 +163,7 @@
 	"flutter.openDevLogSplitCommand": "botright 12split",
 	"flutter.lsp.initialization.onlyAnalyzeProjectsWithOpenFiles": false,
 	"flutter.trace.server": "off",
+	"dart.lineLength": 100,
 	"tslint.autoFixOnSave": false,
 	"python.autoComplete.addBrackets": true,
 	"python.jediEnabled": false,
@@ -227,12 +227,20 @@
 		"bash": {
 			"command": "bash-language-server",
 			"args": ["start"],
-			"filetypes": ["sh"]
+			"filetypes": ["sh"],
+			"ignoredRootPaths": []
 		},
 		"racket": {
 			"command": "racket",
 			"args": ["--lib", "racket-langserver"],
 			"filetypes": ["scheme", "racket"]
+		},
+		"terraform": {
+			"command": "terraform-ls",
+			"args": ["serve"],
+			"filetypes": ["terraform", "tf"],
+			"initializationOptions": {},
+			"settings": {}
 		},
 		"ccls": {
 			"command": "ccls",
@@ -240,32 +248,9 @@
 			"rootPatterns": [".ccls", ".ccls-root", "compile_commands.json", ".git/", ".hg/"],
 			"initializationOptions": {
 				"cache": {
-					"directory": "/usr/bin/ccls"
+					"directory": "/tmp/ccls"
 				}
 			}
-		},
-		"clangd": {
-			"command": "clangd",
-			"rootPatterns": ["compile_flags.txt", "compile_commands.json"],
-			"filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
-		},
-		"CMake": {
-			"command": "cmake-language-server",
-			"filetypes": ["cmake"],
-			"rootPatterns": ["build/"],
-			"initializationOptions": {
-				"buildDirectory": "build"
-			}
-		},
-		"golang": {
-			"command": "gopls",
-			"rootPatterns": ["go.mod"],
-			"filetypes": ["go"]
-		},
-		"sql": {
-			"module": "/path/to/node_modules/sql-language-server/dist/bin/cli.js",
-			"args": ["up", "--method", "node-ipc"],
-			"filetypes": ["sql", "mysql"]
 		}
 	}
 }
