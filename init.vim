@@ -21,6 +21,7 @@ if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
 endif
 
 let g:nvim_plugins_installation_completed=1
+
 if empty(glob($HOME.'/.config/nvim/plugged/wildfire.vim/autoload/wildfire.vim'))
 	let g:nvim_plugins_installation_completed=0
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -97,8 +98,9 @@ tnoremap <C-O> <C-\><C-N><C-O>
 " ==================== Basic Mappings ====================
 let mapleader=" "
 noremap ; :
-nnoremap Q :q<CR>
-nnoremap S :w<CR>
+nnoremap Q :q!<CR>
+nnoremap S :w!<CR>
+
 " Open the vimrc file anytime
 nnoremap <LEADER>rc :e $HOME/.config/nvim/init.vim<CR>
 nnoremap <LEADER>rs :e source $HOME/.config/nvim/init.vim<CR>
@@ -157,8 +159,8 @@ noremap B 5b
 " set h (same as n, cursor left) to 'end of word'
 noremap h e
 " Ctrl + U or E will move up/down the view port without moving the cursor
-noremap <C-U> 5<C-y>
-noremap <C-E> 5<C-e>
+noremap <C-I> 5<C-y>
+noremap <C-K> 5<C-e>
 " Custom cursor movement
 " source $HOME/.config/nvim/cursor.vim
 " If you use Qwerty keyboard, uncomment the next line.
@@ -172,10 +174,10 @@ inoremap <C-a> <ESC>A
 " ==================== Command Mode Cursor Movement ====================
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
+cnoremap <C-i> <Up>
+cnoremap <C-k> <Down>
+cnoremap <C-j> <Left>
+cnoremap <C-l> <Right>
 cnoremap <M-b> <S-Left>
 cnoremap <M-w> <S-Right>
 
@@ -191,10 +193,10 @@ noremap qf <C-w>o
 " Disable the default s key
 noremap s <nop>
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
-noremap su :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
-noremap se :set splitbelow<CR>:split<CR>
-noremap sn :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
-noremap si :set splitright<CR>:vsplit<CR>
+noremap si :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+noremap sk :set splitbelow<CR>:split<CR>
+noremap sj :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+noremap sl :set splitright<CR>:vsplit<CR>
 " Resize splits with arrow keys
 noremap <up> :res +5<CR>
 noremap <down> :res -5<CR>
@@ -260,61 +262,76 @@ map <F10> :TSHighlightCapturesUnderCursor<CR>
 
 " Compile function
 noremap r :call CompileRunGcc()<CR>
-func! CompileRunGcc()
-	exec "w"
-	if &filetype == 'c'
+function! CompileRunGcc()
+	" 获取当前文件路径
+  let l:outdir = $PWD . "/Out/"
+	let l:exedir = l:outdir . expand('%:t:r')
+	let l:exefile = "Out/" . expand('%:t:r')
+	"echo l:exefile
+	"echo l:exedir
+	" 如果文件图存在，创建文件夹
+	if !isdirectory(l:outdir)
+    call mkdir(l:outdir, 'p')
+  endif
+	" 保存当前文件
+  exec "w"
+  if &filetype == 'c'
+    set splitbelow
+    :sp
+    :res -5
+    exec "!gcc % -Wall -o " . l:exefile . " && time ./" . l:exefile
+  elseif &filetype == 'cs'
+    set splitbelow
+    :sp
+    :res -5
+    exec "!mono %<"
+  elseif &filetype == 'cpp'
+    set splitbelow
+    :sp
+    :res -15
+    exec "!g++ -std=c++14 % -Wall -o " . l:exefile . " && time ./" . l:exefile
+  elseif &filetype == 'java'
+    set splitbelow
+    :sp
+    :res -5
+		" term javac % && time java %<
+		exec "!javac % -d " . l:outdir . " && time java -cp " . l:outdir . " " . expand('%:t:r')
+  elseif &filetype == 'python'
+    set splitbelow
+    :sp
+    :res -5
+    exec "!python3 %"
+  elseif &filetype == 'go'
+    set splitbelow
+    :sp
+    :res -5
+    term go run .
+  elseif &filetype == 'javascript'
+    set splitbelow
+    :sp
+    :term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
+  elseif &filetype == 'html'
+    silent! exec "!".g:mkdp_browser." % &"
+  elseif &filetype == 'markdown'
+    exec "InstantMarkdownPreview"
+  elseif &filetype == 'sh'
 		set splitbelow
 		:sp
 		:res -5
-		term gcc % -o %< && time ./%<
-	elseif &filetype == 'cpp'
-		set splitbelow
-		exec "!g++ -std=c++11 % -Wall -o %<"
-		:sp
-		:res -5
-		:term ./%<
-	elseif &filetype == 'cs'
-		set splitbelow
-		silent! exec "!mcs %"
-		:sp
-		:res -5
-		:term mono %<.exe
-	elseif &filetype == 'java'
-		set splitbelow
-		:sp
-		:res -5
-		term javac % && time java %<
-	elseif &filetype == 'sh'
-		:!time bash %
-	elseif &filetype == 'py'
-		set splitbelow
-		:sp
-		:term python3 %
-	elseif &filetype == 'html'
-		silent! exec "!".g:mkdp_browser." % &"
-	elseif &filetype == 'markdown'
-		exec "InstantMarkdownPreview"
-	elseif &filetype == 'tex'
-		silent! exec "VimtexStop"
-		silent! exec "VimtexCompile"
-	elseif &filetype == 'dart'
-		exec "CocCommand flutter.run -d ".g:flutter_default_device." ".g:flutter_run_args
-		silent! exec "CocCommand flutter.dev.openDevLog"
-	elseif &filetype == 'javascript'
-		set splitbelow
-		:sp
-		:term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
+		term time bash &
 	elseif &filetype == 'racket'
 		set splitbelow
 		:sp
 		:res -5
 		term racket %
-	elseif &filetype == 'go'
-		set splitbelow
-		:sp
-		:term go run .
-	endif
-endfunc
+  elseif &filetype == 'tex'
+		silent! exec "VimtexStop"
+		silent! exec "VimtexCompile"
+	elseif &filetype == 'dart'
+		exec "CocCommand flutter.run -d ".g:flutter_default_device." ".g:flutter_run_args
+		silent! exec "CocCommand flutter.dev.openDevLog"
+  endif
+endfunction
 
 
 " ==================== Install Plugins with Vim-Plug ====================
@@ -323,6 +340,8 @@ call plug#begin('$HOME/.config/nvim/plugged')
 "Themes
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
+" Copilot
+Plug 'github/copilot.vim'
 
 Plug 'itchyny/vim-cursorword'
 
@@ -350,10 +369,10 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'kevinhwang91/rnvimr'
 Plug 'airblade/vim-rooter'
-Plug 'pechorin/any-jump.vim'
+" Plug 'pechorin/any-jump.vim'
 
 " Debugger
-" Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python --enable-go'}
+Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python --enable-go'}
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'commit': '63dd239bfe02998810b39d039827e2510885b57b'}
@@ -411,7 +430,7 @@ Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
 " Python
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins'}
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': ['python', 'vim-plug']}
 Plug 'tweekmonster/braceless.vim', { 'for' :['python', 'vim-plug'] }
 "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
@@ -512,10 +531,23 @@ colorscheme tokyonight-night
 hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
 
+" Github Copilot
+hi copilot ctermfg=white guifg=white ctermbg=black guibg=black
+hi copilotComment ctermfg=grey guifg=grey ctermbg=black guibg=black
+hi copilotString ctermfg=green guifg=green ctermbg=black guibg=black
+hi copilotNumber ctermfg=yellow guifg=yellow ctermbg=black guibg=black
+hi copilotKeyword ctermfg=blue guifg=blue ctermbg=black guibg=black
+hi copilotFunction ctermfg=red guifg=red ctermbg=black guibg=black
+hi copilotType ctermfg=yellow guifg=yellow ctermbg=black guibg=black
+hi copilotOperator ctermfg=white guifg=white ctermbg=black guibg=black
+hi copilotPunctuation ctermfg=white guifg=white ctermbg=black guibg=black
+hi copilotOther ctermfg=white guifg=white ctermbg=black guibg=black
+
+let g:copilot_no_tab_map = v:true
+imap <silent><script><expr> <C-y> copilot#Accept("\<CR>")
 
 " ==================== eleline.vim ====================
 let g:airline_powerline_fonts = 0
-
 
 " ==================== gitsigns.nvim ====================
 lua <<EOF
@@ -539,6 +571,7 @@ nnoremap <LEADER>g= :Gitsigns next_hunk<CR>
 
 " ==================== coc.nvim ====================
 let g:coc_global_extensions = [
+	\ 'coc-copilot',
 	\ 'coc-css',
 	\ 'coc-diagnostic',
 	\ 'coc-docker',
@@ -551,11 +584,12 @@ let g:coc_global_extensions = [
 	\ 'coc-java',
 	\ 'coc-jest',
 	\ 'coc-json',
+	\ 'coc-jedi',
 	\ 'coc-lists',
 	\ 'coc-omnisharp',
 	\ 'coc-prettier',
 	\ 'coc-prisma',
-	\ 'coc-pyright',
+	\ 'coc-sumneko-lua',
 	\ 'coc-snippets',
 	\ 'coc-sourcekit',
 	\ 'coc-stylelint',
@@ -707,10 +741,10 @@ let g:undotree_WindowLayout = 2
 let g:undotree_DiffpanelHeight = 8
 let g:undotree_SplitWidth = 24
 function g:Undotree_CustomMap()
-	nmap <buffer> u <plug>UndotreeNextState
-	nmap <buffer> e <plug>UndotreePreviousState
-	nmap <buffer> U 5<plug>UndotreeNextState
-	nmap <buffer> E 5<plug>UndotreePreviousState
+nmap <buffer> i <plug>UndotreeNextState
+	nmap <buffer> k <plug>UndotreePreviousState
+	nmap <buffer> I 5<plug>UndotreeNextState
+	nmap <buffer> K 5<plug>UndotreePreviousState
 endfunc
 
 
@@ -961,9 +995,9 @@ let g:move_key_modifier = 'C'
 
 
 " ==================== any-jump ====================
-nnoremap m :AnyJump<CR>
-let g:any_jump_window_width_ratio  = 0.8
-let g:any_jump_window_height_ratio = 0.9
+" nnoremap m :AnyJump<CR>
+" let g:any_jump_window_width_ratio  = 0.8
+" let g:any_jump_window_height_ratio = 0.9
 
 
 " ==================== typescript-vim ====================
@@ -1030,8 +1064,8 @@ noremap g# g#<Cmd>lua require('hlslens').start()<CR>
 
 
 " ==================== fzf-lua ====================
-noremap <silent> <C-p> :FzfLua files<CR>
-noremap <silent> <C-f> :Rg<CR>
+noremap <silent> <C-f> :FzfLua files<CR>
+noremap <silent> <C-p> :Rg<CR>
 noremap <silent> <C-h> :FzfLua oldfiles cwd=~<CR>
 noremap <silent> <C-q> :FzfLua builtin<CR>
 noremap <silent> <C-t> :FzfLua lines<CR>
@@ -1149,7 +1183,7 @@ endif
 
 
 " ==================== lazygit.nvim ====================
-noremap <c-g> :LazyGit<CR>
+noremap <LEADER>lg :LazyGit<CR>
 let g:lazygit_floating_window_winblend = 0 " transparency of floating window
 let g:lazygit_floating_window_scaling_factor = 1.0 " scaling factor for floating window
 let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
@@ -1248,6 +1282,10 @@ let g:terminal_color_11 = '#F4F99D'
 let g:terminal_color_12 = '#CAA9FA'
 let g:terminal_color_13 = '#FF92D0'
 let g:terminal_color_14 = '#9AEDFE'
+
+" ======================== SemShi ==========================
+" g:semshi#filetypes = ['python']
+" g:semshi#no_default_builtin_highlight = v:true
 
 
 " ==================== Necessary Commands to Execute ====================

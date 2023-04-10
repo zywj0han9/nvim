@@ -2,6 +2,8 @@
 let g:snips_author = 'J0han'
 let g:python_host_prog='/usr/bin/python2'
 let g:python3_host_prog='/usr/bin/python3'
+let g:qt5_host_prog='/usr/lib/qt'
+let g:qt6_host_prog='/usr/lib/qt6'
 let g:qt_host_prog='/usr/lib/qt'
 " let g:qt5_host_prog=''
 let g:mkdp_browser = 'chromium'
