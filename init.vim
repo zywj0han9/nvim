@@ -3,15 +3,15 @@
 "| |\/| |\ V /  |  \| |\ \ / / | || |\/| | |_) | |
 "| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___
 "|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
-
+"
 " Author: @theniceboy
 " Revise: @zyw9
 " Checkout-list
 " vim-esearch
 " fmoralesc/worldslice
 " SidOfc/mkdx
-
-
+"
+"
 "
 " ==================== Auto load for first time uses ====================
 if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
@@ -109,6 +109,12 @@ augroup NVIMRC
     autocmd!
     autocmd BufWritePost *.nvimrc exec ":so %"
 augroup END
+
+augroup filetype
+    autocmd!
+    autocmd BufNewFile *.py,*.sh,*.cpp exec ":call FileTitle()"
+augroup END
+
 " Undo operations
 noremap l u
 " Insert Key
@@ -231,6 +237,54 @@ source $HOME/.config/nvim/md-snippets.vim
 
 " auto spell
 autocmd BufRead,BufNewFile *.md setlocal spell
+function! FileTitle()
+	let ext = expand("%:e")
+	if ext == 'sh'
+		call setline(1           ,  "#!/usr/bin/bash")
+		call append(line(".")    ,  "")
+		call append(line(".") + 1,  "")
+		call append(line(".") + 2,  "#######################################################")
+		call append(line(".") + 3,  "###")
+		call append(line(".") + 4,  "###  @ Author     :          JohanD")
+		call append(line(".") + 5,  "###  @ Mail       :    zhangyu.wei@outlook.com")
+		call append(line(".") + 6,  "###  @ Filen Name :    ".expand("%"))
+		call append(line(".") + 7,  "###  @ Create Time:    ".strftime("%c"))
+		call append(line(".") + 8,  "###  @ Notes      :")
+		call append(line(".") + 9,  "###")
+		call append(line(".") + 10, "#######################################################")
+		call append(line(".") + 11, "")
+		call append(line(".") + 12, "")
+	elseif ext == 'py'
+		call setline(1           ,  "#!/usr/bin/bash")
+		call append(line(".")    ,  "#coding=utf-8")
+		call append(line(".") + 1,  "")
+		call append(line(".") + 2,  "")
+		call append(line(".") + 3,  "#######################################################")
+		call append(line(".") + 4,  "###")
+		call append(line(".") + 5,  "###  @ Author     :          JohanD")
+		call append(line(".") + 6,  "###  @ Mail       :    zhangyu.wei@outlook.com")
+		call append(line(".") + 7,  "###  @ File Name  :    ".expand("%"))
+		call append(line(".") + 8,  "###  @ Create Time:    ".strftime("%c"))
+		call append(line(".") + 9,  "###  @ Notes      :")
+		call append(line(".") + 10, "#######################################################")
+		call append(line(".") + 11, "")
+		call append(line(".") + 12, "")
+	elseif ext == 'cpp'
+		call setline(1           ,  "")
+		call append(line(".")    ,  "")
+		call append(line(".") + 1,  "#######################################################")
+		call append(line(".") + 2,  "###")
+		call append(line(".") + 3,  "###  @ Author     :          JohanD")
+		call append(line(".") + 4,  "###  @ Mail       :    zhangyu.wei@outlook.com")
+		call append(line(".") + 5,  "###  @ File Name  :    ".expand("%"))
+		call append(line(".") + 6,  "###  @ Create Time:    ".strftime("%c"))
+		call append(line(".") + 7,  "###  @ Notes      :")
+		call append(line(".") + 8,  "#######################################################")
+		call append(line(".") + 9,  "")
+		call append(line(".") + 10, "")
+	endif
+	autocmd BufNewFile * normal G
+endfunction
 
 
 " ==================== Other useful stuff ====================
@@ -263,23 +317,24 @@ map <F10> :TSHighlightCapturesUnderCursor<CR>
 " Compile function
 noremap r :call CompileRunGcc()<CR>
 function! CompileRunGcc()
+	" 保存当前文件
+	exec "w"
 	" 获取当前文件路径
-  let l:outdir = $PWD . "/Out/"
-	let l:exedir = l:outdir . expand('%:t:r')
-	let l:exefile = "Out/" . expand('%:t:r')
-	"echo l:exefile
-	"echo l:exedir
-	" 如果文件图存在，创建文件夹
+	let l:outdir = $PWD . "/Out"
+	" 如果文件夹存在，创建文件夹
 	if !isdirectory(l:outdir)
     call mkdir(l:outdir, 'p')
   endif
-	" 保存当前文件
-  exec "w"
+	let l:exepath = $PWD . "/" . expand('%:t')
+	let l:outfile = $PWD . "/Out/" . expand('%:t:r')
+	let l:exefile = "Out/" . expand("%:t:r")
+	" echo l:exefile
   if &filetype == 'c'
     set splitbelow
     :sp
     :res -5
-    exec "!gcc % -Wall -o " . l:exefile . " && time ./" . l:exefile
+    exec "!gcc " . l:exepath . " -Wall -o " . l:outfile 
+		exec "!time " . l:outfile
   elseif &filetype == 'cs'
     set splitbelow
     :sp
@@ -289,8 +344,10 @@ function! CompileRunGcc()
     set splitbelow
     :sp
     :res -15
-    exec "!g++ -std=c++14 % -Wall -o " . l:exefile . " && time ./" . l:exefile
-  elseif &filetype == 'java'
+		" echo "!g++ -std=c++14 " . l:exepath . " -Wall -o " . l:exefile . " && time ./" . l:exefile
+    exec "!g++ -std=c++14 " . l:exepath . " -Wall -o " . l:exefile
+		exec "!time " . l:outfile
+	elseif &filetype == 'java'
     set splitbelow
     :sp
     :res -5
@@ -300,7 +357,8 @@ function! CompileRunGcc()
     set splitbelow
     :sp
     :res -5
-    exec "!python3 %"
+		:term python3 %
+    " exec "!python3 %"
   elseif &filetype == 'go'
     set splitbelow
     :sp
@@ -430,7 +488,7 @@ Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
 " Python
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': ['python', 'vim-plug']}
+" Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': ['python', 'vim-plug']}
 Plug 'tweekmonster/braceless.vim', { 'for' :['python', 'vim-plug'] }
 "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
@@ -584,11 +642,11 @@ let g:coc_global_extensions = [
 	\ 'coc-java',
 	\ 'coc-jest',
 	\ 'coc-json',
-	\ 'coc-jedi',
 	\ 'coc-lists',
 	\ 'coc-omnisharp',
 	\ 'coc-prettier',
 	\ 'coc-prisma',
+	\ 'coc-pyright',
 	\ 'coc-sumneko-lua',
 	\ 'coc-snippets',
 	\ 'coc-sourcekit',
@@ -1014,10 +1072,38 @@ if g:nvim_plugins_installation_completed == 1
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 	-- one of "all", "language", or a list of languages
-	ensure_installed = {"typescript", "dart", "java", "c", "prisma", "bash", "go", "html", "cpp", "java", "css", "swift", "php","ini", "http", "sql", "json", "lua", "fish", "sql", "vim", "vue", "yaml", "cuda", "python" },
+	ensure_installed = {
+		"typescript", 
+		"dart", 
+		"java",
+		"c",
+		"prisma",
+		"bash",
+		"go",
+		"html",
+		"cpp",
+		"java",
+		"css",
+		"swift",
+		"php",
+		"ini",
+		"http",
+		"sql",
+		"json",
+		"lua",
+		"fish",
+		"sql",
+		"vim",
+		"vue",
+		"yaml",
+		"cuda",
+		"python",
+		"r",
+		"swift",
+	},
 	highlight = {
 		enable = true,              -- false will disable the whole extension
-		disable = { "rust" },  -- list of language that will be disabled
+		disable = {},  -- list of language that will be disabled
 	},
 }
 EOF
@@ -1184,9 +1270,9 @@ endif
 
 " ==================== lazygit.nvim ====================
 noremap <LEADER>lg :LazyGit<CR>
-let g:lazygit_floating_window_winblend = 0 " transparency of floating window
+let g:lazygit_floating_window_chars= 0 " transparency of floating window
 let g:lazygit_floating_window_scaling_factor = 1.0 " scaling factor for floating window
-let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
+let g:lazygit_floating_window_border_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
 let g:lazygit_use_neovim_remote = 1 " for neovim-remote support
 
 
@@ -1284,9 +1370,36 @@ let g:terminal_color_13 = '#FF92D0'
 let g:terminal_color_14 = '#9AEDFE'
 
 " ======================== SemShi ==========================
-" g:semshi#filetypes = ['python']
-" g:semshi#no_default_builtin_highlight = v:true
-
+" let g:semshi#enable = 1
+" let g:semshi#enable_signs = 1
+" let g:semshi#filetypes = ['python']
+" let g:semshi#no_default_builtin_highlight = v:true
+" let g:semshi#excluded_hl_groups = ['local']
+" let g:semshi#error_sign = v:true
+" let g:semshi#error_sign_delay = 1.5
+" let g:semshi#always_update_all_highlights = v:false
+" let g:semshi#tolerate_syntax_errors = v:true
+" let g:semshi#update_delay_factor = 0.0
+" let g:semshi#self_to_attribute = v:true
+" let g:semshi#enable_type_inference = 1
+" function MyCustomHighlights()
+"     hi semshiGlobal      ctermfg=red guifg=#ff0000
+"     hi semshiLocal           ctermfg=209 guifg=#ff875f
+"     hi semshiGlobal          ctermfg=214 guifg=#ffaf00
+"     hi semshiImported        ctermfg=214 guifg=#ffaf00 cterm=bold gui=bold
+"     hi semshiParameter       ctermfg=75  guifg=#5fafff
+"     hi semshiParameterUnused ctermfg=117 guifg=#87d7ff cterm=underline gui=underline
+"     hi semshiFree            ctermfg=218 guifg=#ffafd7
+"     hi semshiBuiltin         ctermfg=207 guifg=#ff5fff
+"     hi semshiAttribute       ctermfg=49  guifg=#00ffaf
+"     hi semshiSelf            ctermfg=249 guifg=#b2b2b2
+"     hi semshiUnresolved      ctermfg=226 guifg=#ffff00 cterm=underline gui=underline
+"     hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
+"     hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+"     hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+"     sign define semshiError text=E> texthl=semshiErrorSign
+" endfunction
+" autocmd FileType python call MyCustomHighlights()
 
 " ==================== Necessary Commands to Execute ====================
 exec "nohlsearch"
