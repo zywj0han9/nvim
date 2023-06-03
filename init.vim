@@ -258,7 +258,7 @@ function! FileTitle()
 		call setline(1           ,  "#!/usr/bin/bash")
 		call append(line(".")    ,  "#coding=utf-8")
 		call append(line(".") + 1,  "")
-		call append(line(".") + 2,  "")
+		call append(line(".") + 2,  "\"\"\"")
 		call append(line(".") + 3,  "#######################################################")
 		call append(line(".") + 4,  "###")
 		call append(line(".") + 5,  "###  @ Author     :          JohanD")
@@ -267,7 +267,7 @@ function! FileTitle()
 		call append(line(".") + 8,  "###  @ Create Time:    ".strftime("%c"))
 		call append(line(".") + 9,  "###  @ Notes      :")
 		call append(line(".") + 10, "#######################################################")
-		call append(line(".") + 11, "")
+		call append(line(".") + 11, "\"\"\"")
 		call append(line(".") + 12, "")
 	elseif ext == 'cpp'
 		call setline(1           ,  "")
@@ -397,9 +397,6 @@ call plug#begin('$HOME/.config/nvim/plugged')
 
 "Themes
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-
-" Copilot
-Plug 'github/copilot.vim'
 
 Plug 'itchyny/vim-cursorword'
 
