@@ -1,4 +1,15 @@
-snippet st "print"
-print(${0})
+snippet print "print"
+print(f"\n{0}")
 endsnippet
 
+
+snippet import "import"
+import os
+import sys
+import pathlib.Path
+
+
+if __name__ == "__main__":
+	{0}
+	pass
+endsnippet

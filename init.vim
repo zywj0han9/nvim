@@ -321,15 +321,16 @@ function! CompileRunGcc()
 	exec "w"
 	" 获取当前文件路径
 	let l:outdir = $PWD . "/Out"
-	" 如果文件夹存在，创建文件夹
-	if !isdirectory(l:outdir)
-    call mkdir(l:outdir, 'p')
-  endif
+
 	let l:exepath = $PWD . "/" . expand('%:t')
 	let l:outfile = $PWD . "/Out/" . expand('%:t:r')
 	let l:exefile = "Out/" . expand("%:t:r")
 	" echo l:exefile
   if &filetype == 'c'
+	" 如果文件夹存在，创建文件夹
+		if !isdirectory(l:outdir)
+			call mkdir(l:outdir, 'p')
+		endif
     set splitbelow
     :sp
     :res -5
@@ -341,6 +342,10 @@ function! CompileRunGcc()
     :res -5
     exec "!mono %<"
   elseif &filetype == 'cpp'
+	" 如果文件夹存在，创建文件夹
+		if !isdirectory(l:outdir)
+			call mkdir(l:outdir, 'p')
+		endif
     set splitbelow
     :sp
     :res -15
@@ -397,7 +402,7 @@ call plug#begin('$HOME/.config/nvim/plugged')
 
 "Themes
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/vim-cursorword'
 
 " Github Copilot
@@ -580,8 +585,9 @@ set termguicolors " enable true colors support
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " Themes
 " silent! color deus
-colorscheme tokyonight-night
-
+" colorscheme tokyonight-night
+colorscheme gruvbox
+hi Normal guibg=NONE ctermbg=NONE
 
 hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
