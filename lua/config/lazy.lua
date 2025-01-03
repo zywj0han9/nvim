@@ -20,33 +20,6 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim" if not (vim.uv or v
 end
 vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
-require("lazy").setup({
-	-- Theme 美化 
-	{
-	"folke/tokyonight.nvim",
-	style='night',
-	lazy = false,
-	priority = 1000,
-	opts = {},
-	},
-	-- Markdown 美化
-	{
-	"yelog/marklive.nvim",
-    	dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    	lazy = true,
-    	ft = "markdown",
-    	opts = {}
-	},
-	-- nvim-tree
-	{
-	"nvim-tree/nvim-tree.lua",
-  	version = "*",
-  	lazy = false,
-  	dependencies = {
-    	"nvim-tree/nvim-web-devicons",
-  	},
-  	config = function()
-    	require("nvim-tree").setup {}
-  	end,
-	},
-})
+require("lazy").setup("config.plugins")
+-- theme set
+vim.cmd([[colorscheme tokyonight-night]])
