@@ -7,15 +7,17 @@
 -- ========================================
 
 
--- ################
--- ###  Global  ###
--- ################
+-------------------
+--- Global
+-------------------
+local opts = {noremap=true, silent=true}
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- ####################
--- ###  NvimTree    ###
--- ####################
+-------------------
+--- NvimTree
+-------------------
 -- 打开
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 -- 刷新
@@ -42,3 +44,8 @@ vim.keymap.set('n', 'f', ':NvimTreeFindFile<CR>', { silent = true })
 --vim.keymap.set('n', ''
 -- 上级一目录
 -- vim.keymap.set(
+
+-------------------
+--- blink cmd
+-------------------
+
