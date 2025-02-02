@@ -1,3 +1,6 @@
-require("config.core")
-require("config.lazy")
+require('core.option')
+-- require('core.functions')
+require('core.keymap')
+-- require('core.autocmd')
+require('plugins.lazy')
 

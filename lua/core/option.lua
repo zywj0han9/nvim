@@ -1,4 +1,12 @@
---vim.opt.number = true
+-- ========================================
+-- 文件名：option.lua
+-- 作者：J0han9
+-- 创建日期：20250106
+-- 描述：neovim Option  
+-- ========================================
+
+
+vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 4
 vim.opt.expandtab = true
