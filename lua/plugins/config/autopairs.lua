@@ -1,6 +1,6 @@
-local npairs = require('nvim-autopairs')
+local pairs = require('nvim-autopairs')
 
-npairs.setup({
+pairs.setup({
     check_ts = true,
     ts_config = {
         lua = { 'string', 'source' },

@@ -2,19 +2,11 @@ return {
     "smoka7/multicursors.nvim",
     event = "VeryLazy",
     dependencies = {
-        'nvimtools/hydra.nvim',
+        'anuvyklack/hydra.nvim',
     },
     opts = {},
     config = function()
                  require('plugins.config.multicursors')
     end,
     cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
-    keys = {
-            {
-                mode = { 'v', 'n' },
-                '<Leader>m',
-                '<cmd>MCstart<cr>',
-                desc = 'Create a selection for selected text or word under the cursor',
-            },
-        },
 }

@@ -36,7 +36,7 @@ local function on_attach(bufnr)
     vim.keymap.set('n', 'r', api.fs.rename, opts('Rename'))
     -- 刷新
     vim.keymap.set('n', 'R', api.tree.reload, opts('Reload'))
-    -- 
+    --
     --       ↑
     --       u
     -- ← n   e   i →
@@ -128,4 +128,3 @@ nvim_tree.setup({
         relativenumber = true,
     },
 })
-

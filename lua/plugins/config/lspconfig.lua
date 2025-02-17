@@ -8,6 +8,17 @@ if auto_install then
         'pyright',
         'gopls',
         'clangd',
+        'lua_ls',
+        'bashls',
+        'jsonls',
+        'vimls',
+        'typos_lsp',
+        'vimls',
+        'dockerls',
+        'sqls',
+        'cssls',
+        'html',
+        'markdown_oxide'
     }
 end
 

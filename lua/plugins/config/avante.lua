@@ -9,11 +9,11 @@ local M = {}
 M._defaults = {
   debug = false,
   ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "vertex" | "cohere" | "copilot" | string
-  provider = "claude", -- Only recommend using Claude
+  provider = "gemini", -- Only recommend using Claude
   -- WARNING: Since auto-suggestions are a high-frequency operation and therefore expensive,
   -- currently designating it as `copilot` provider is dangerous because: https://github.com/yetone/avante.nvim/issues/1048
   -- Of course, you can reduce the request frequency by increasing `suggestion.debounce`.
-  auto_suggestions_provider = "claude",
+  auto_suggestions_provider = "gemini",
   ---@alias Tokenizer "tiktoken" | "hf"
   -- Used for counting tokens and encoding text.
   -- By default, we will use tiktoken.

@@ -1,10 +1,72 @@
 local treesitter = require('nvim-treesitter.configs')
-local textobjects = require('plugins.lang.textobjects')
+local textobjects = require('plugins.config.textobjects')
 
 local auto_install = require('lib.util').get_user_config('auto_install', true)
 local installed_parsers = {}
+--        'bash',
+--        'css',
+--        'dart',
+--        'elixir',
+--        'gitcommit',
+--        'go',
+--        'html',
+--        'java',
+--        'javascript',
+--        'json',
+--        'lua',
+--        'markdown',
+--        'markdown_inline', -- markdown code blocks
+--        'python',
+--        'ruby',
+--        'rust',
+--        'typescript',
+--        'vim',
+--        'vimdoc',
+--        'yaml',
+--        'cpp',
+--        'php',
+--        'phpdoc',
+--        'sql',
+--        'ssh_config',
+--        'git_config',
+--        'git_rebase',
+--        'gitcommit',
+--        'gitignore',
+--        'nginx',
+--}
 if auto_install then
-    installed_parsers = require('plugins.list').ts_parsers
+    installed_parsers = {
+        'bash',
+        'css',
+        'dart',
+        'elixir',
+        'gitcommit',
+        'go',
+        'html',
+        'java',
+        'javascript',
+        'json',
+        'lua',
+        'markdown',
+        'markdown_inline', -- markdown code blocks
+        'python',
+        'ruby',
+        'rust',
+        'typescript',
+        'vim',
+        'vimdoc',
+        'yaml',
+        'cpp',
+        'php',
+        'phpdoc',
+        'sql',
+        'ssh_config',
+        'git_config',
+        'git_rebase',
+        'gitcommit',
+        'gitignore',
+        'nginx',
+    }
 end
 
 treesitter.setup({
@@ -42,22 +104,6 @@ treesitter.setup({
         },
     },
 
-    textsubjects = {
-        enable = true,
-        prev_selection = ',',
-        keymaps = {
-            ['.'] = { 'textsubjects-smart', desc = 'Select the current text subject' },
-            ['a;'] = {
-                'textsubjects-container-outer',
-                desc = 'Select outer container (class, function, etc.)',
-            },
-            ['i;'] = {
-                'textsubjects-container-inner',
-                desc = 'Select inside containers (classes, functions, etc.)',
-            },
-        },
-    },
-
     refactor = {
         highlight_definitions = {
             enable = true,
@@ -67,7 +113,7 @@ treesitter.setup({
         smart_rename = {
             enable = true,
             keymaps = {
-                smart_rename = '<leader>rr',
+                smart_rename = '<leader>aa',
             },
         },
         navigation = {
