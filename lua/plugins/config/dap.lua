@@ -61,7 +61,7 @@ end
 
 dap.adapters.python = {
     type = 'executable',
-    command = '/home/j0han9/anaconda3/bin/python',
+    command = vim.fn.exepath('python3'),
     args = { '-m', 'debugpy.adapter' },
 }
 
@@ -72,18 +72,19 @@ dap.configurations.python = {
         name = 'Launch file',
 
         program = '${file}',
-        pythonPath = function()
-            local cwd = vim.fn.getcwd()
-            if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
-                return cwd .. '/venv/bin/python'
-            elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
-                return cwd .. '/.venv/bin/python'
-            elseif vim.fn.executable('/usr/bin/python') then
-                return '/usr/bin/python'
-            else
-                return '~/anaconda3/bin/python'
-            end
-        end,
+        pythonPath = vim.fn.exepath('python3')
+        --function()
+        --    local cwd = vim.fn.getcwd()
+        --    if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+        --        return cwd .. '/venv/bin/python'
+        --    elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+        --        return cwd .. '/.venv/bin/python'
+        --    elseif vim.fn.executable('/usr/bin/python') then
+        --        return '/usr/bin/python'
+        --    else
+        --        return vim.fn.exepath('python3')
+        --    end
+        --end,
     },
 }
 
