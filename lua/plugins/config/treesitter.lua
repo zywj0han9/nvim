@@ -3,37 +3,7 @@ local textobjects = require('plugins.config.textobjects')
 
 local auto_install = require('lib.util').get_user_config('auto_install', true)
 local installed_parsers = {}
---        'bash',
---        'css',
---        'dart',
---        'elixir',
---        'gitcommit',
---        'go',
---        'html',
---        'java',
---        'javascript',
---        'json',
---        'lua',
---        'markdown',
---        'markdown_inline', -- markdown code blocks
---        'python',
---        'ruby',
---        'rust',
---        'typescript',
---        'vim',
---        'vimdoc',
---        'yaml',
---        'cpp',
---        'php',
---        'phpdoc',
---        'sql',
---        'ssh_config',
---        'git_config',
---        'git_rebase',
---        'gitcommit',
---        'gitignore',
---        'nginx',
---}
+
 if auto_install then
     installed_parsers = {
         'bash',

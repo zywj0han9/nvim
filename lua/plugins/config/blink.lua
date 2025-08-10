@@ -16,6 +16,18 @@ blink.setup({
         menu = { border = 'rounded' },
         documentation = { window = { border = 'rounded' } },
     },
+    cmdline = {
+        keymap = { preset = 'inherit' },
+        completion = {
+            menu = {
+                auto_show = function(ctx)
+                    return vim.fn.getcmdtype() == ':'
+                    -- enable for inputs as well, with:
+                    -- or vim.fn.getcmdtype() == '@'
+                end,
+            },
+        },
+    },
     signature = { window = { border = 'rounded' } },
     appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups

@@ -43,6 +43,7 @@ chat.setup({
 
     -- default mappings
     mappings = {
+
         complete = {
             insert = '<Tab>',
         },

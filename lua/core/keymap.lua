@@ -131,3 +131,9 @@ vim.keymap.set('n', 'tn', ':bprevious<CR>', opts)
 vim.keymap.set('n', '<leader>m', '<Cmd>MCstart<CR>', opts)
 vim.keymap.set('v', '<leader>m', '<Cmd>MCstart<CR>', opts)
 
+-------------------
+--- Copilot Chat
+-------------------
+
+vim.api.nvim_set_keymap('n', '<leader>cc', ':CopilotChat<CR>', { noremap = true, silent = true })
+

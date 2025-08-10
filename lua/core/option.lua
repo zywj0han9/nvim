@@ -5,7 +5,7 @@
 -- 描述：neovim Option
 -- ========================================
 
-
+vim.g.loaded_perl_provider = 0
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 4
