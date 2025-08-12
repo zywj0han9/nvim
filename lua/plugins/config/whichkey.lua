@@ -47,10 +47,9 @@ local setup = {
         spacing = 6,
         align = 'center',
     },
-    show_help = false,
+    show_help = true,
     show_keys = true,
     triggers = {
-        { '<auto>', mode = 'nixsotc' },
         { '<leader>', mode = { 'n', 'v' } },
     },
 }

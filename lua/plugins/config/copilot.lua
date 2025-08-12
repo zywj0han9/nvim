@@ -3,7 +3,9 @@
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 -- 自定义接受建议的快捷键，例如使用 Ctrl+J
-vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.keymap.set("i", "<C-J>", function()
+  require("copilot.suggestion").accept()
+end, { silent = true })
 
 local copilot = require('copilot')
 

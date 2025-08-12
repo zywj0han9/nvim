@@ -11,5 +11,5 @@ return {
     },
     config = function()
             require("plugins.config.noice")
-    end
+    end,
 }

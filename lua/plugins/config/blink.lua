@@ -4,7 +4,7 @@ local icons = require('lib.icons')
 blink.setup({
     -- 'default', 'super-tab', 'enter'
     keymap = {
-        preset = 'enter',
+        preset = 'cmdline',
         ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
         ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
     },

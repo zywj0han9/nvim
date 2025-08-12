@@ -46,7 +46,6 @@ local function on_attach(bufnr)
     vim.keymap.set('n', 'U', api.node.navigate.sibling.first, opts('First Sibling'))
     vim.keymap.set('n', 'u', 'k', opts('Prev Sibling'))
     vim.keymap.set('n', 'e', 'j', opts('Prev Sibling'))
-
 end
 
 local prev = { new_name = '', old_name = '' } -- Prevents duplicate events
@@ -121,7 +120,7 @@ nvim_tree.setup({
     update_focused_file = { enable = true, update_cwd = true, ignore_list = {} },
     git = { enable = true, ignore = true, timeout = 500 },
     view = {
-        width = 30,
+        width = 20,
         side = 'left',
         adaptive_size = true,
         number = true,

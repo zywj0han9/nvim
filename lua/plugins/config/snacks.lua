@@ -83,7 +83,7 @@ Snacks.setup({
     },
     bigfile = {
         enabled = true,
-        notify = true,
+        notify = false,
         size = 100 * 1024, -- 100 KB
     },
     bufdelete = { enabled = true },
@@ -154,7 +154,7 @@ Snacks.setup({
     },
     lazygit = { enabled = true },
     notifier = {
-        enabled = true,
+        enabled = false,
         timeout = 2000,
         width = { min = 40, max = 0.4 },
         height = { min = 1, max = 0.6 },
@@ -175,7 +175,7 @@ Snacks.setup({
         more_format = ' ↓ %d lines ',
         refresh = 50,
     },
-    notify = { enabled = true },
+    notify = { enabled = false },
     profiler = { enabled = true },
     quickfile = { enabled = true },
     rename = { enabled = true },

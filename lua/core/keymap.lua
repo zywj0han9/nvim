@@ -79,7 +79,7 @@ vim.api.nvim_set_keymap('v', 'N', '0', opts)
 vim.api.nvim_set_keymap('v', 'I', '$', opts)
 
 -- 唤起终端
-vim.api.nvim_set_keymap('n','<leader>/', ':new +resize10 term://fish<CR>',opts)
+-- vim.api.nvim_set_keymap('n','<leader>/', ':new +resize10 term://fish<CR>',opts)
 
 -- 窗口切换快捷键
 vim.api.nvim_set_keymap('n', '<leader>w', '<C-W>w', { noremap = true, silent = true })
@@ -128,12 +128,17 @@ vim.keymap.set('n', 'tn', ':bprevious<CR>', opts)
 -------------------
 --- Multicursors
 -------------------
-vim.keymap.set('n', '<leader>m', '<Cmd>MCstart<CR>', opts)
-vim.keymap.set('v', '<leader>m', '<Cmd>MCstart<CR>', opts)
+--vim.keymap.set('n', '<leader>m', '<Cmd>MCstart<CR>', opts)
+--vim.keymap.set('v', '<leader>m', '<Cmd>MCstart<CR>', opts)
 
 -------------------
 --- Copilot Chat
 -------------------
 
 vim.api.nvim_set_keymap('n', '<leader>cc', ':CopilotChat<CR>', { noremap = true, silent = true })
+
+-------------------
+--- Snacks
+-------------------
+-- 例子：<leader><space> Smart Find Files
 

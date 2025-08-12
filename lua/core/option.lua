@@ -24,4 +24,3 @@ vim.opt.sidescrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.o.hlsearch = true  -- 高亮所有匹配的搜索结果
 vim.o.incsearch = true -- 实时显示搜索匹配结果
-
