@@ -1,5 +1,5 @@
 local lspconfig = require('lspconfig')
-local icons = require('lib.icons').diagnostics
+local icons = require('lib.icons')
 
 local auto_install = require('lib.util').get_user_config('auto_install', true)
 local installed_servers = {}

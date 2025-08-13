@@ -1,5 +1,4 @@
 local mason = require('mason')
-
 local icons = require('lib.icons')
 mason.setup({
     -- - "prepend": Use mason binary, "append": Use system binary

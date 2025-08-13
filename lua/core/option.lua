@@ -8,8 +8,10 @@
 vim.g.loaded_perl_provider = 0
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.tabstop = 4
-vim.opt.expandtab = true
+vim.o.expandtab = false
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
 vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.swapfile = false
