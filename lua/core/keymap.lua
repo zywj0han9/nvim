@@ -128,12 +128,6 @@ vim.keymap.set('n', '<leader>s', ':split<CR>', opts)      -- 水平分割
 vim.keymap.set('n', '<leader>v', ':vsplit<CR>', opts)     -- 垂直分割
 vim.keymap.set('n', '<leader>o', '<C-W>o', opts)          -- 只保留当前窗口
 
--- 对角线窗口移动
--- vim.keymap.set('n', '<leader>nu', '<C-W>k<C-W>h', opts)   -- 左上
--- vim.keymap.set('n', '<leader>iu', '<C-W>k<C-W>l', opts)   -- 右上
--- vim.keymap.set('n', '<leader>ie', '<C-W>j<C-W>l', opts)   -- 右下
--- vim.keymap.set('n', '<leader>ne', '<C-W>j<C-W>h', opts)   -- 左下
-
 -- ========================================
 -- 标签页管理
 -- ========================================
@@ -192,7 +186,8 @@ vim.keymap.set('n', '<leader>r', ':DapUIToggle<CR>', opts)
 -- === LSP 功能 ===
 -- 使用 Snacks 的 LSP 功能，保持你原有的配置
 vim.keymap.set('n', '<leader><space>', '<cmd>lua require("snacks").picker.smart()<CR>', opts)
-vim.keymap.set('n', '<leader>/', '<cmd>lua require("snacks").terminal()<CR>', opts)
+
+vim.keymap.set('n', '<leader>se', '<cmd>lua require("snacks").explorer()<CR>', opts)
 vim.keymap.set('n', 'gd', '<cmd>lua require("snacks").picker.lsp_definitions()<CR>', opts)
 vim.keymap.set('n', 'gr', '<cmd>lua require("snacks").picker.lsp_references()<CR>', opts)
 vim.keymap.set('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -214,8 +209,8 @@ vim.keymap.set('n', '<leader>fb', '<cmd>lua require("snacks").picker.buffers()<C
 vim.keymap.set('n', '<leader>fr', '<cmd>lua require("snacks").picker.recent()<CR>', opts)
 
 -- === 终端 ===
-vim.keymap.set('n', '<C-t>', '<cmd>lua require("snacks").terminal()<CR>', opts)
-vim.keymap.set('t', '<C-t>', '<cmd>lua require("snacks").terminal()<CR>', opts)
+vim.keymap.set('n', '<leader>/', '<cmd>lua require("snacks").terminal()<CR>', opts)
+vim.keymap.set('t', '<leader>/', '<cmd>lua require("snacks").terminal()<CR>', opts)
 
 -- 终端模式下的导航
 vim.keymap.set('t', '<C-u>', '<C-\\><C-N><C-W>k', opts)
