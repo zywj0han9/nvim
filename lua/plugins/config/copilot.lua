@@ -39,17 +39,43 @@ copilot.setup({
         },
     },
     filetypes = {
-        yaml = true,
-        markdown = true,
-        help = true,
-        gitcommit = true,
-        gitrebase = true,
-        hgcommit = true,
-        svn = true,
-        cvs = true,
-        python = true,
-        cpp = true,
-        lua = true,
+	    -- 编程语言
+		python = true,
+		lua = true,
+		cpp = true,
+		c = true,
+		javascript = true,
+		typescript = true,
+		go = true,
+		rust = true,
+		java = true,
+
+		-- 脚本和配置
+		sh = true,
+		bash = true,
+		zsh = true,
+		fish = true,
+
+		-- Web 开发
+		html = true,
+		css = true,
+		scss = true,
+		vue = true,
+		svelte = true,
+
+		-- 文档
+		markdown = true,
+		yaml = true,
+		json = true,
+		toml = true,
+
+		-- Git
+		gitcommit = true,
+		gitrebase = true,
+
+		-- 其他
+		vim = true,
+		help = false,  -- 禁用帮助文档
     },
     copilot_node_command = 'node', -- Node.js version must be > 16.x
     server_opts_overrides = {},

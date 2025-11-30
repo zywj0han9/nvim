@@ -18,7 +18,7 @@ if auto_install then
         'sqls',
         'cssls',
         'html',
-        'markdown_oxide'
+        'markdown_oxide',
     }
 end
 
@@ -44,9 +44,28 @@ require('mason-lspconfig').setup({
                 capabilities = require('blink.cmp').get_lsp_capabilities(),
                 settings = {
                     Lua = {
-                        runtime = { version = 'LuaJIT' },
-                        diagnostics = { globals = { 'vim' } },
-                        workspace = { library = { vim.env.VIMRUNTIME } },
+                        runtime = {
+							version = 'LuaJIT',
+                            path = vim.split(package.path, ';'),  -- 添加这行
+						},
+                        diagnostics = {
+							globals = { 'vim' },
+							disable = {
+								'missing-fields',           -- 缺少字段（TreeSitter 配置常见）
+								'incomplete-signature-doc', -- 签名文档不完整
+								'undefined-field',          -- 未定义字段（插件动态字段）
+                            },
+						},
+                        workspace = {
+							library = {
+								vim.env.VIMRUNTIME,
+								vim.fn.stdpath('config'),
+								vim.fn.stdpath('data') .. '/lazy/lazy.nvim',
+                                '${3rd}/luv/library',
+							},
+                            checkThirdParty = false,
+						},
+						telemetry = { enable = false },
                         format = {
                             enable = true,
                             defaultConfig = {

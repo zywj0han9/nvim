@@ -8,5 +8,6 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
 local render_markdown = require('render-markdown')
 
 render_markdown.setup({
-    latex = { enabled = true }
+	yaml = { enabled = true },
+    latex = { enabled = true },
 })

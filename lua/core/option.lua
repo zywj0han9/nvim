@@ -32,3 +32,20 @@ if vim.env.TERM == 'xterm-kitty' then
   vim.cmd([[autocmd UIEnter * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[>1u") | endif]])
   vim.cmd([[autocmd UILeave * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[<1u") | endif]])
 end
+
+vim.api.nvim_create_autocmd("CursorHold", {
+    callback = function()
+        local opts = {
+            focusable = false,
+            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+            border = 'rounded',
+            source = 'always',  -- 显示错误来源（例如 lua_ls）
+            prefix = ' ',
+            scope = 'cursor',
+        }
+        vim.diagnostic.open_float(nil, opts)
+    end
+})
+
+-- 设置悬停延迟时间（毫秒）
+vim.opt.updatetime = 300  -- 300ms 后触发
