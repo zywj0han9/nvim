@@ -1,5 +1,5 @@
 return {
-    enable = true,
+    enable = false,
     "zbirenbaum/copilot.lua",
     dependencies = { 'ginuxtaposition/blink-cmp-copilot' },
     event = "InsertEnter",  -- 插入模式下加载
