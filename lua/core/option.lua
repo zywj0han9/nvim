@@ -27,3 +27,8 @@ vim.opt.signcolumn = "yes"
 vim.o.hlsearch = true  -- 高亮所有匹配的搜索结果
 vim.o.incsearch = true -- 实时显示搜索匹配结果
 
+-- 启用 Kitty 键盘协议
+if vim.env.TERM == 'xterm-kitty' then
+  vim.cmd([[autocmd UIEnter * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[>1u") | endif]])
+  vim.cmd([[autocmd UILeave * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[<1u") | endif]])
+end

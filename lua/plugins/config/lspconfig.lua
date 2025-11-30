@@ -41,7 +41,7 @@ require('mason-lspconfig').setup({
         default_setup,
         lua_ls = function()
             lspconfig.lua_ls.setup({
-                capabilities = lsp_capabilities,
+                capabilities = require('blink.cmp').get_lsp_capabilities(),
                 settings = {
                     Lua = {
                         runtime = { version = 'LuaJIT' },

@@ -63,12 +63,10 @@ vim.keymap.set('v', 'I', '$', opts)
 -- 单词移动
 vim.keymap.set('n', '<C-n>', 'b', opts)  -- 前一个单词
 vim.keymap.set('n', '<C-i>', 'w', opts)  -- 后一个单词
-
--- === 插入模式下的方向键 ===
-vim.keymap.set('i', '<C-u>', '<Up>', opts)
-vim.keymap.set('i', '<C-e>', '<Down>', opts)
-vim.keymap.set('i', '<C-n>', '<Left>', opts)
-vim.keymap.set('i', '<C-i>', '<Right>', opts)
+vim.keymap.set('v', '<C-n>', 'b', opts)
+vim.keymap.set('v', '<C-i>', 'w', opts)
+vim.keymap.set('n', 'gi', '<C-o>', opts)   -- gi = 后退
+vim.keymap.set('n', 'gn', '<C-i>', opts)   -- gn = 前进
 
 -- ========================================
 -- 重新映射被占用的重要功能
@@ -100,7 +98,6 @@ vim.keymap.set('n', '<C-e>', 'n', opts)    -- 下一个搜索结果
 vim.keymap.set('n', '<C-u>', 'N', opts)    -- 上一个搜索结果
 vim.keymap.set('n', 'sf', '*', opts)    -- 搜索当前单词
 vim.keymap.set('n', 'sF', '#', opts)    -- 反向搜索当前单词
-
 -- 搜索后居中
 -- vim.keymap.set('n', '<C-f>', 'nzz', opts)
 -- vim.keymap.set('n', '<C-F>', 'Nzz', opts)

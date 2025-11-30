@@ -7,6 +7,9 @@ blink.setup({
         preset = 'cmdline',
         ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
         ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+		['<CR>'] = { 'accept', 'fallback' },  -- 添加这一行
+		['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+		['<C-y>'] = { 'select_and_accept' },  -- Ctrl-y 直接选中并接受
     },
     -- 'preselect', 'manual', 'auto_insert'
     completion = {
@@ -37,13 +40,19 @@ blink.setup({
         -- kind_icons = icons.kind,
     },
     sources = {
-        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
         providers = {
             lazydev = {
                 name = 'LazyDev',
                 module = 'lazydev.integrations.blink',
                 -- make lazydev completions top priority (see `:h blink.cmp`)
                 score_offset = 100,
+            },
+			copilot = {
+                name = 'copilot',
+                module = 'blink-cmp-copilot',
+                score_offset = 100,  -- 高优先级
+                async = true,
             },
         },
     },
