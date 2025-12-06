@@ -3,7 +3,6 @@ return {
         dependencies = {
             'moyiz/blink-emoji.nvim',
             'rafamadriz/friendly-snippets',
-            'giuxtaposition/blink-cmp-copilot',
             'dmitmel/cmp-digraphs',
         },
         version = '*',

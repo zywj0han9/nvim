@@ -204,9 +204,6 @@ vim.keymap.set('n', '<leader>B', "<Cmd>lua require'dap'.clear_breakpoints()<CR>"
 vim.keymap.set('n', '<leader>r', ':DapUIToggle<CR>', opts)
 
 -- === LSP 功能 ===
--- 使用 Snacks 的 LSP 功能，保持你原有的配置
-vim.keymap.set('n', '<leader><space>', '<cmd>lua require("snacks").picker.smart()<CR>', opts)
-
 vim.keymap.set('n', '<leader>se', '<cmd>lua require("snacks").explorer()<CR>', opts)
 vim.keymap.set('n', 'gd', '<cmd>lua require("snacks").picker.lsp_definitions()<CR>', opts)
 vim.keymap.set('n', 'gr', '<cmd>lua require("snacks").picker.lsp_references()<CR>', opts)

@@ -7,18 +7,16 @@
 -- how I found out it was missing from treesitter
 
 return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = ':TSUpdate',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter-refactor',
-            'nvim-treesitter/nvim-treesitter-textobjects',
-            'RRethy/nvim-treesitter-endwise',
-            'windwp/nvim-ts-autotag',
-        },
-        configure = function()
-                        require('plugins.config.treesitter')
-                    end,
-        event = { 'BufReadPost', 'BufNewFile' },
+    "nvim-treesitter/nvim-treesitter",
+    build = ':TSUpdate',
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter-refactor',
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        'RRethy/nvim-treesitter-endwise',
+        'windwp/nvim-ts-autotag',
     },
+    configure = function()
+		require('plugins.config.treesitter')
+	end,
+    event = { 'BufReadPost', 'BufNewFile' },
 }

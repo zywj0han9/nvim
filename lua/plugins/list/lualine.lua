@@ -4,5 +4,5 @@ return {
     config = function()
                  require('plugins.config.lualine')
              end,
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile', 'VeryLazy' },
 }

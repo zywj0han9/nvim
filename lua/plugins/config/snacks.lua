@@ -2,8 +2,86 @@ local Snacks = require('snacks')
 local icons = require('lib.icons')
 
 Snacks.setup({
-	keys = {
-
+	picker = {
+		sources = {
+            explorer = {
+                -- ===== 外观和行为 =====
+                follow_file = true,        -- 自动跟随当前文件
+                show_hidden = false,       -- 默认不显示隐藏文件
+                
+                -- ===== 窗口配置 =====
+                win = {
+                    -- Input 窗口(路径输入栏)的键位
+                    input = {
+                        keys = {
+                            ["<Esc>"] = "close",
+                        },
+                    },
+                    
+                    -- List 窗口(文件列表)的键位 - 这是关键!
+                    list = {
+                        keys = {
+                            -- === Colemak 核心导航 ===
+                            ["u"] = "list_up",         -- 向上
+                            ["e"] = "list_down",       -- 向下
+                            ["U"] = "list_top",        -- 跳到顶部
+                            ["E"] = "list_bottom",     -- 跳到底部
+                            
+                            -- === 文件/目录操作 ===
+                            ["i"] = "confirm",         -- 打开文件/进入目录
+                            ["l"] = "confirm",         -- 同上(额外的 Colemak 友好键)
+                            ["<CR>"] = "confirm",      -- 回车也能用
+                            ["n"] = "explorer_close",  -- 关闭目录节点
+                            ["h"] = "explorer_close",  -- 同上
+                            ["<BS>"] = "explorer_up",  -- Backspace 返回上级
+                            
+                            -- === 分割窗口打开 ===
+                            ["v"] = "vsplit",          -- 垂直分割
+                            ["s"] = "split",           -- 水平分割
+                            ["t"] = "tab",             -- 新标签页
+                            
+                            -- === 文件管理 ===
+                            ["a"] = "explorer_add",    -- 新建文件/目录
+                            ["d"] = "explorer_del",    -- 删除
+                            ["r"] = "explorer_rename", -- 重命名
+                            ["x"] = "explorer_cut",    -- 剪切
+                            ["c"] = "explorer_copy",   -- 复制
+                            ["p"] = "explorer_paste",  -- 粘贴
+                            
+                            -- === 复制路径 ===
+                            ["y"] = "copy_name",       -- 复制文件名
+                            ["Y"] = "copy_path",       -- 复制相对路径
+                            ["gy"] = "copy_absolute_path", -- 复制绝对路径
+                            
+                            -- === 其他操作 ===
+                            ["R"] = "refresh",         -- 刷新
+                            ["H"] = "toggle_hidden",   -- 切换隐藏文件
+                            ["."] = "toggle_hidden",   -- 同上
+                            ["?"] = "help",            -- 帮助
+                            ["q"] = "close",           -- 关闭 explorer
+                            ["<Esc>"] = "close",       -- Esc 关闭
+                            
+                            -- === Git 导航 ===
+                            ["]g"] = "next_git",       -- 下一个 Git 变更
+                            ["[g"] = "prev_git",       -- 上一个 Git 变更
+                            
+                            -- === 预览 ===
+                            ["<Tab>"] = "preview",     -- 预览文件
+                        },
+					},
+				},
+                -- ===== 格式化配置 =====
+                format = function(item)
+                    local icons_map = {
+                        folder_closed = "",
+                        folder_open = "",
+                        file = "",
+                        symlink = "",
+                    }
+                    return item
+                end,
+			},
+		}
 	},
     animate = {
         enabled = true,
@@ -233,6 +311,49 @@ Snacks.setup({
     explorer = { 
 		enabled = true,
 		replace_netrw = true,
+		-- ===== 外观配置 =====
+	    width = 35,                    -- 侧边栏宽度
+		position = "left",             -- left/right/float
+		icons = {
+			folder_closed = "",
+			folder_open = "",
+			file = "",
+			symlink = "",
+			modified = "●",
+			hidden = "󰘓",
+		},
+    
+		-- ===== 行为配置 =====
+		follow_file = true,            -- 自动跟随当前文件
+		auto_close = false,            -- 打开文件后不自动关闭
+		show_hidden = false,           -- 默认隐藏 dotfiles
+    
+		-- ===== Git 集成 =====
+		git = {
+			enabled = true,
+			show_ignored = true,      -- 不显示 .gitignore 的文件
+		},
+    
+	    -- ===== 过滤器 =====
+		filters = {
+			custom = { 
+				"^%.git$",             -- 隐藏 .git 目录
+				"node_modules",        -- 隐藏 node_modules
+				"%.pyc$",              -- 隐藏 Python 缓存
+				"%.class$",            -- 隐藏 Java 编译文件
+				"__pycache__",
+			},
+		},
+    
+		-- ===== 文件操作 =====
+		actions = {
+			open_file = {
+				quit_on_open = false,  -- 打开文件后不关闭 explorer
+				window_picker = {
+					enable = true,      -- 启用窗口选择器
+				},
+			},
+		},
 	},
     image = { enabled = true },
 })

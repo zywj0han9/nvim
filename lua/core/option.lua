@@ -18,7 +18,6 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = vim.fn.stdpath("config") .. "/undo"
 vim.opt.undofile = true
-vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
@@ -26,6 +25,11 @@ vim.opt.sidescrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.o.hlsearch = true  -- 高亮所有匹配的搜索结果
 vim.o.incsearch = true -- 实时显示搜索匹配结果
+vim.opt.clipboard = "unnamedplus"  -- 系统剪贴板同步
+vim.opt.mouse = "a"                -- 启用鼠标
+vim.opt.cursorline = true          -- 高亮当前行
+vim.opt.ignorecase = true          -- 搜索忽略大小写
+vim.opt.smartcase = true           -- 智能大小写
 
 -- 启用 Kitty 键盘协议
 if vim.env.TERM == 'xterm-kitty' then

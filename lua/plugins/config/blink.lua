@@ -48,12 +48,6 @@ blink.setup({
                 -- make lazydev completions top priority (see `:h blink.cmp`)
                 score_offset = 100,
             },
-			copilot = {
-                name = 'copilot',
-                module = 'blink-cmp-copilot',
-                score_offset = 100,  -- 高优先级
-                async = true,
-            },
         },
     },
 })
