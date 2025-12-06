@@ -14,7 +14,7 @@ blink.setup({
     -- 'preselect', 'manual', 'auto_insert'
     completion = {
         list = {
-                selection = { auto_insert = true },
+                selection = { auto_insert = false },
         },
         menu = { border = 'rounded' },
         documentation = { window = { border = 'rounded' } },
@@ -48,6 +48,12 @@ blink.setup({
                 -- make lazydev completions top priority (see `:h blink.cmp`)
                 score_offset = 100,
             },
+			copilot = {
+				name = 'Copilot',
+				module = 'blink-cmp-copilot',
+				score_offset = 85,
+				async = true,
+			},
         },
     },
 })

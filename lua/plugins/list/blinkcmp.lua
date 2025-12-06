@@ -4,6 +4,7 @@ return {
             'moyiz/blink-emoji.nvim',
             'rafamadriz/friendly-snippets',
             'dmitmel/cmp-digraphs',
+			'giuxtaposition/blink-cmp-copilot',
         },
         version = '*',
         config = function()

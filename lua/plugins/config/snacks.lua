@@ -3,6 +3,7 @@ local icons = require('lib.icons')
 
 Snacks.setup({
 	picker = {
+		enabled = true,
 		sources = {
             explorer = {
                 -- ===== 外观和行为 =====
@@ -70,16 +71,6 @@ Snacks.setup({
                         },
 					},
 				},
-                -- ===== 格式化配置 =====
-                format = function(item)
-                    local icons_map = {
-                        folder_closed = "",
-                        folder_open = "",
-                        file = "",
-                        symlink = "",
-                    }
-                    return item
-                end,
 			},
 		}
 	},
