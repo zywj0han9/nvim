@@ -164,10 +164,33 @@ vim.keymap.set('n', 'ge', '}', opts)   -- 下一段
 -- 插件相关快捷键
 -- ========================================
 
--- === 文件树 ===
-vim.keymap.set('n', '<leader>tt', ':NvimTreeToggle<CR>', opts)
-vim.keymap.set('n', '<leader>tf', ':NvimTreeFocus<CR>', opts)
-vim.keymap.set('n', '<leader>tc', ':NvimTreeCollapse<CR>', opts)
+-- 打开/关闭文件树
+vim.keymap.set('n', '<leader>tt', function() Snacks.explorer() end, { desc = "Toggle Explorer", silent = true })
+-- 定位当前文件在文件树中的位置
+vim.keymap.set('n', '<leader>tf', function() Snacks.explorer.reveal() end, { desc = "Reveal File", silent = true })
+
+-- === Git (替代 lazygit.nvim) ===
+vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = "Lazygit", silent = true })
+vim.keymap.set('n', '<leader>gb', function() Snacks.picker.git_branches() end, { desc = "Git Branches", silent = true })
+vim.keymap.set('n', '<leader>gl', function() Snacks.picker.git_log() end, { desc = "Git Log", silent = true })
+
+-- === 搜索/查找 (Picker) ===
+vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end, { desc = "Find Files", silent = true })
+vim.keymap.set('n', '<leader>fg', function() Snacks.picker.grep() end, { desc = "Grep", silent = true })
+vim.keymap.set('n', '<leader>fb', function() Snacks.picker.buffers() end, { desc = "Buffers", silent = true })
+vim.keymap.set('n', '<leader>fr', function() Snacks.picker.recent() end, { desc = "Recent", silent = true })
+vim.keymap.set('n', '<leader><space>', function() Snacks.picker.smart() end, { desc = "Smart Find", silent = true })
+
+-- === LSP 跳转 ===
+vim.keymap.set('n', 'gd', function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition", silent = true })
+vim.keymap.set('n', 'gr', function() Snacks.picker.lsp_references() end, { desc = "References", silent = true })
+-- 注意：gh (hover) 和 gs (signature) 最好用 vim.lsp 原生的，因为 Noice 会美化它们
+vim.keymap.set('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+
+-- === 终端 ===
+vim.keymap.set('n', '<leader>/', function() Snacks.terminal() end, { desc = "Toggle Terminal", silent = true })
+vim.keymap.set('t', '<leader>/', function() Snacks.terminal() end, { desc = "Toggle Terminal", silent = true })
 
 -- === DAP 调试 ===
 vim.keymap.set('n', '<F5>', "<Cmd>lua require'dap'.continue()<CR>", opts)
@@ -191,7 +214,7 @@ vim.keymap.set('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
 -- === Git 相关 ===
-vim.keymap.set('n', '<leader>gg', ':LazyGit<CR>', opts)
+vim.keymap.set('n', '<leader>gg',function() Snacks.lazygit() end, { desc = "Lazygit", silent = true })
 vim.keymap.set('n', '<leader>gb', '<cmd>lua require("snacks").picker.git_branches()<CR>', opts)
 vim.keymap.set('n', '<leader>gl', '<cmd>lua require("snacks").picker.git_log()<CR>', opts)
 
